@@ -55,6 +55,7 @@ class IndexController {
         @RequestParam to: String,
         model: Model
     ): String {
+        LOGGER.info("converting source config from $from to $to")
         model["sourceConfig"] = sourceConfig
         if (from == to) {
             model["convertedConfig"] = sourceConfig
