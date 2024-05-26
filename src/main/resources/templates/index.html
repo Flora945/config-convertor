@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Config converter</title>
+</head>
+<body>
+<h1>Config converter</h1>
+<form action="/convert" method="post">
+    <label for="sourceConfig">Paste your config here:</label><br>
+    <textarea id="sourceConfig" name="sourceConfig" rows="10" cols="50" th:text="${sourceConfig}">
+    </textarea><br>
+    <label for="from">from:</label>
+    <select id="from" name="from">
+        <option value="yaml" th:selected="${from == 'yaml'}">YAML</option>
+        <option value="properties" th:selected="${from == 'properties'}">Properties</option>
+    </select>
+    <label for="to">to:</label>
+    <select id="to" name="to">
+        <option value="properties" th:selected="${to == 'properties'}">Properties</option>
+        <option value="yaml" th:selected="${to == 'yaml'}">YAML</option>
+    </select>
+    <input type="submit" value="Convert">
+</form>
+<textarea rows="10" cols="50" readonly th:text="${convertedConfig}">
+</textarea>
+
+</body>
+</html>
