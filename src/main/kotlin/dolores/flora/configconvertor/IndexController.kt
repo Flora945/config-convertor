@@ -3,12 +3,15 @@ package dolores.flora.configconvertor
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import org.slf4j.LoggerFactory
+import org.springframework.boot.context.event.ApplicationReadyEvent
+import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
+
 
 /**
  * @author qihuaiyuan
@@ -28,6 +31,15 @@ fun createYamlMapper(): YAMLMapper {
 
 @Controller
 class IndexController {
+
+    @EventListener(ApplicationReadyEvent::class)
+    fun openBrowser(event: ApplicationReadyEvent) {
+        event.applicationContext.environment.also { env ->
+            val port = env.getProperty("server.port", "8080")
+            val url = "http://localhost:${port}/"
+            LOGGER.info("Please open your browser and visit: $url")
+        }
+    }
 
     @GetMapping("/")
     fun index(model: Model): String {
