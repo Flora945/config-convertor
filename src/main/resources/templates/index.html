@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Config converter</title>
+    <script>
+        function swap() {
+            const from = document.getElementById('from');
+            const to = document.getElementById('to');
+            const fromValue = from.value;
+            const toValue = to.value;
+            from.value = toValue;
+            to.value = fromValue;
+        }
+    </script>
 </head>
 <body>
 <h1>Config converter</h1>
@@ -15,7 +25,7 @@
         <option value="yaml" th:selected="${from == 'yaml'}">YAML</option>
         <option value="properties" th:selected="${from == 'properties'}">Properties</option>
     </select>
-    <label for="to">to:</label>
+    <button type="button" onclick="swap()"><=></button>
     <select id="to" name="to">
         <option value="properties" th:selected="${to == 'properties'}">Properties</option>
         <option value="yaml" th:selected="${to == 'yaml'}">YAML</option>
